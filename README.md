@@ -9,6 +9,11 @@ Also, it improves my personal internet security and privacy.
 To me: Don't forget to change the private DNS settings on my phone.
 
 
+Thank you @varunsridharan for the great article.
+
+- https://blog.svarun.dev/configure-pi-hole-with-dns-over-tls-private-dns
+
+
 ## Requirement
 
 - Domain name and access to the name server
@@ -137,3 +142,8 @@ You can see the password in the console output. But you can reset the password u
 ```bash
 sudo docker exec pihole sudo pihole -a -p __COMPLEX_PASSWORD__
 ```
+
+
+## Certificate renewal
+
+TODO: Check later
