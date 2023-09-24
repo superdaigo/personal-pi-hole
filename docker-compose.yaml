@@ -1,17 +1,30 @@
 version: "3"
 
-# More info at https://github.com/pi-hole/docker-pi-hole/ and https://docs.pi-hole.net/
 services:
-  pihole:
+  pihole:  # Pi-hole https://github.com/pi-hole/docker-pi-hole/
     container_name: pihole
     image: pihole/pihole:latest
     ports:
-      - "53:53/tcp"
-      - "53:53/udp"
-      - "80:80/tcp"
+      - 53:53/tcp
+      - 53:53/udp
+      - 80:80/tcp
     environment:
-      TZ: 'Etc/UTC'
-    volumes:  # Volumes store your data between container upgrades
-      - './etc-pihole:/etc/pihole'
-      - './etc-dnsmasq.d:/etc/dnsmasq.d'
+      TZ: Etc/UTC
+      PIHOLE_DNS: 8.8.8.8;8.8.4.4
+      DNSSEC: true
+    volumes:
+      - ./etc-pihole:/etc/pihole
+      - ./etc-dnsmasq.d:/etc/dnsmasq.d
     restart: unless-stopped
+  nginx:  # https://hub.docker.com/_/nginx
+    container_name: nginx
+    build: ./docker-nginx-streams
+    ports:
+      - 853:853/tcp
+    environment:
+      DOMAIN_NAME: __DOMAIN_NAME__  # replace the domain name
+      NGINX_ENVSUBST_OUTPUT_DIR: /etc/nginx/streams
+    volumes:
+      - ./var-log-nginx/:/var/log/nginx/
+      - ./etc-letsencrypt/:/etc/letsencrypt/:ro  # TLS Certificate
+    restart: always
