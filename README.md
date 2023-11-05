@@ -17,29 +17,18 @@ Thank you @varunsridharan for the great article.
 ## Requirement
 
 - Domain name and access to the name server
-- Global IP address
-
+- Google Cloud Platform
 
 ## Setup
 
 ### GCP Compute Engine
 
 - Instance type: `e2-micro` (utilize free tire)
-- OS: Ubuntu 22.04
-- Network tag: `dns-server`
+- OS: Ubuntu 22.04 LTS
 
-Firewall rule:
-
-Create the following rules.
-
-- Name: allow-dns-over-tls (Incoming: 0.0.0.0/0, Port: 853, Protocol: TCP, Target tag: `dns-server`)
-- Name: allow-iap-ssh (Incoming: 35.235.240.0/20, Port: 22, Target is all instance in the network)
-- Name: allow-iap-http (Incoming: 35.235.240.0/20, Port: 80, Target is all instance in the network)
-  
-Delete default incoming rules allowing access from the internet.
+See more details in [Create GCP Resources](create-gcp-resources.md)
 
 SSH to the instance from the GCP web console.
-
 
 ### Release port 53 from systemd-resolved
 
@@ -47,8 +36,19 @@ Reference: https://www.linuxuprising.com/2020/07/ubuntu-how-to-free-up-port-53-u
 
 Modify `/etc/systemd/resolved.conf`
 
+``` bash
+echo "# Lookup Google DNS
+DNS=8.8.8.8
+DNSStubListener=no" | \
+  sudo tee -a /etc/systemd/resolved.conf
+```
+
+Confirm
+
 ```shell
-$ grep -E '^(DNS|DNSStubListener)' /etc/systemd/resolved.conf
+$ grep -v  '^#' /etc/systemd/resolved.conf
+
+[Resolve]
 DNS=8.8.8.8
 DNSStubListener=no
 ```
@@ -66,11 +66,16 @@ Clone this repository under the `/opt` directory.
 
 ```bash
 cd /opt
-git clone https://github.com/superdaigo/personal-pi-hole.git
+sudo git clone https://github.com/superdaigo/personal-pi-hole.git
 ```
 
 Modify `__DOMAIN_NAME__` with your DNS server's name in the [docker-compose.yaml](docker-compose.yaml) file.
 
+confirmation
+
+``` bash
+grep DOMAIN_NAME: personal-pi-hole/docker-compose.yaml
+```
 
 ### Install docker
 

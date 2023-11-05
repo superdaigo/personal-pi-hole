@@ -10,7 +10,7 @@ services:
       - 80:80/tcp
     environment:
       TZ: Etc/UTC
-      PIHOLE_DNS: 8.8.8.8;8.8.4.4
+      PIHOLE_DNS: 8.8.8.8;8.8.4.4;2001:4860:4860::8888;2001:4860:4860::8844  # Google Public DNS
       DNSSEC: true
     volumes:
       - ./etc-pihole:/etc/pihole
