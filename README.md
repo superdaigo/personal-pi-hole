@@ -115,6 +115,7 @@ sudo docker run -it --rm \
   -d __DOMAIN_NAME__
 ```
 
+Update your DNS record.
 
 Start pi-hole
 
