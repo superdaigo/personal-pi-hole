@@ -43,7 +43,7 @@ DNSStubListener=no" | \
   sudo tee -a /etc/systemd/resolved.conf
 ```
 
-Confirm
+Confirmation
 
 ```shell
 $ grep -v  '^#' /etc/systemd/resolved.conf
@@ -150,6 +150,18 @@ sudo docker exec pihole sudo pihole -a -p __COMPLEX_PASSWORD__
 ```
 
 
-## Certificate renewal
+## Renew certificate
 
 TODO: Check later
+
+``` bash
+cd /opt/personal-pi-hole
+
+sudo docker run -it --rm \
+  -v ./etc-letsencrypt/:/etc/letsencrypt/:rw \
+  certbot/certbot \
+  certonly \
+  --manual \
+  --preferred-challenges dns \
+  -d __DOMAIN_NAME__
+```
