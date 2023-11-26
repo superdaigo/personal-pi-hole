@@ -3,7 +3,7 @@
 This is my work log creating a personal pi-hole(https://pi-hole.net) machine on the GCP for Android private DNS.
 
 I expect to speed up my mobile internet by dropping unnecessary network traffic.
-Also, it improves security and privacy on the internet.
+Also, it improves security and privacy on the Internet.
 
 Thank you @varunsridharan for the great article.
 
@@ -11,7 +11,7 @@ Thank you @varunsridharan for the great article.
 
 ## Overview
 
-Here is an overview of the Android private DNS and what can be created by this repository.
+Here is an overview of the Android private DNS and components managed by this repository.
 Since the Android requires a hostname of the private DNS as a nature of DNS over TLS, the private DNS server must have a domain name registered in another DNS server.
 
 ![](personal-pi-hole.drawio.png)
@@ -72,7 +72,7 @@ sudo git clone https://github.com/superdaigo/personal-pi-hole.git
 ```
 
 Create "/opt/personal-pi-hole/.env" file.
-Replace "pi-hole.domain.name" with appropreate FQDN.
+Replace "pi-hole.domain.name" with appropriate FQDN.
 
 ``` bash
 echo "DOMAIN_NAME=pi-hole.domain.name" | sudo tee /opt/personal-pi-hole/.env
@@ -80,7 +80,7 @@ echo "DOMAIN_NAME=pi-hole.domain.name" | sudo tee /opt/personal-pi-hole/.env
 
 ### Install docker
 
-See the following url.
+See the following URL.
 https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository
 
 
@@ -93,7 +93,7 @@ sudo docker compose config
 
 ### Certbot (Let's Encrypt)
 
-Certbot is a probram to obtain/renew/delete a TLS certificate issued by Let's Encrypt.
+Certbot is a tool to obtain/renew/delete a TLS certificate issued by Let's Encrypt.
 
 - Let's Encrypt: https://letsencrypt.org
 - Certbot: https://certbot.eff.org
@@ -133,9 +133,9 @@ sudo docker compose up -d
 
 ## Pi-hole Web Admin Console
 
-In this procedure, port 80 is not opened to the internet intentionally.
+The Pi-hole web admin console is available through the IAP tunnel.
 
-So, IAP tunnel is needed to connect to the Pi-hole web admin console.
+In this procedure, port 80 is not exposed to the Internet.
 
 ```bash
 gcloud compute start-iap-tunnel __INSTANCE_ID__ 80 \
