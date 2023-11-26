@@ -22,7 +22,7 @@ services:
     ports:
       - 853:853/tcp
     environment:
-      DOMAIN_NAME: __DOMAIN_NAME__  # replace the domain name
+      DOMAIN_NAME: $DOMAIN_NAME  # define the variable "DOMAINN_NAME" in the ".env" file
       NGINX_ENVSUBST_OUTPUT_DIR: /etc/nginx/streams
     volumes:
       - ./var-log-nginx/:/var/log/nginx/
