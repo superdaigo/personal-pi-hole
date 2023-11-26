@@ -11,8 +11,8 @@ Thank you @varunsridharan for the great article.
 
 ## Overview
 
-Here is an overview of the Android personal DNS and what can be created by this repository.
-Since the Android requires a hostname of the Private DNS, the personal DNS server must have a domain name registered in another DNS server.
+Here is an overview of the Android private DNS and what can be created by this repository.
+Since the Android requires a hostname of the private DNS as a nature of DNS over TLS, the private DNS server must have a domain name registered in another DNS server.
 
 ![](personal-pi-hole.drawio.png)
 
